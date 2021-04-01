@@ -1,6 +1,6 @@
 # WAV Clustering Workflow
 
-This project organizes a given collection of audio samples by acoustic similarity.
+This project uses machine learning to organize a given collection of audio samples by acoustic similarity.
 
 This workflow uses hierarchical clustering of 68 derived acoustic features to group and order the samples by similarity.  Then it saves renamed copies of the wav files that are ordered by similarity. Finally, it saves a dendrogram for visualization. 
 
@@ -26,12 +26,13 @@ By reordering .wav files such that similar .wavs are next to one another, subtle
 * scipy 
 * matplotlib 
 
-#### optional R packages 
+#### optional R packages :
 
-for clustered feature heatmap and dimensionality reduction visualization (in script 'visualize_clusters_and_umap.R'):
 
 * data.table
 * UMAP
+
+These are exploratory visualization.  The 909 benchmark below uses them to plot the clustered feature heatmap and dimensionality reduction. (in script 'visualize_clusters_and_umap.R'):
 
 
 ## 909 drum machine clustering benchmark results
@@ -39,10 +40,10 @@ for clustered feature heatmap and dimensionality reduction visualization (in scr
 This benchmark can be considered a 'sanity check' or positive control experiment.  
 
 I wanted to make sure hierarchical clustering could be used to reliably separate kick drums, toms, hi-hats, snares, etc from one another.  Since I had the truth labels for these drum sounds, (colored bar above the heatmap), I could do a quick check to make sure the clustered acoustic properties align with the truly distinct drum sound types.  You can see the algorithm does a pretty decent job.
-![heatmap](./figures/909_clustered.pdf)
+![heatmap](./figures/clustermap_909.pdf)
 
 I also made a UMAP projection to reduce the dimensionality of the feature space from 136 (68 * 2 frames) to 2 dimensions. 
-![umap](./directory_1/directory_2/.../directory_n/umap_909plot.png)
+![umap](./figures/umap_909.png)
 This UMAP plot is interesting but it is difficult to explain the groupings.  I wonder if it reflects similarities in synthesis / sampling methods of the drums of the 909.
 
 NB:  You will need to use the R script to generate plots like these.
