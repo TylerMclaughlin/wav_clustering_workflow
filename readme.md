@@ -2,9 +2,9 @@
 
 This project uses machine learning to organize a given collection of audio samples by acoustic similarity.
 
-This workflow uses hierarchical clustering of 68 derived acoustic features to group and order the samples by similarity.  Then it saves renamed copies of the wav files that are ordered by similarity. Finally, it saves a dendrogram for visualization. 
+Presented as a workflow in Python, this project uses hierarchical clustering of 68 derived acoustic features to group and order the samples by similarity.  Then it saves renamed copies of the wav files that are ordered by similarity. Finally, it saves a dendrogram for visualization. 
 
-The exploratory R code visualizes a clustered feature heatmap and UMAP dimensionality projection.
+The exploratory R code can be used to visualize a clustered feature heatmap and a UMAP dimensionality reduction.
 
 The reliability of the algorithm was assessed on 71 free Roland 909 drum machine samples from [BPB 909 Casette](https://bedroomproducersblog.com/2014/04/24/free-909-samples/). 
 The algorithm successfully groups kick drums, toms, snare drums, and cymbals together.  Acoustic features are extracted from the first two non-overlapping 50 ms frames of the audio.  68 features per frame per sample are calculated using the pyAudioAnalysis library. Features include MFCCs, chroma, energy, spectral entropy, and more from pyAudioAnalysis.
