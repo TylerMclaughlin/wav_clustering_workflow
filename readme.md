@@ -2,7 +2,7 @@
 
 This tool uses machine learning to organize a given collection of audio samples by acoustic similarity.
 
-Presented as a workflow in `Python`, this project applies hierarchical clustering on 68 derived acoustic features for the purposes of grouping and ordering audio samples by similarity.  Then it uses the clustering to reorder the samples and saves renamed copies of the `.wav` files to apply the new file organization. Finally, it saves a dendrogram for visualization of the clusters. 
+Presented as a workflow in `Python`, this project applies hierarchical clustering on 68 derived acoustic features for the purpose of grouping and ordering audio samples by similarity.  `.wav` files from many separate directories can be used as input.  In a new directory, renamed copies of all the input `.wav` files are saved; these copies are named such that their alphabetical order corresponds to acoustic similarity as determined by clustering.  In other words, adjacent samples in the new directory, e.g. `00012.wav` and `00013.wav`, will sound similar, whereas `00012.wav` and `00082.wav` will sound less similar.   Finally, it saves a dendrogram for visualization of the clusters. 
 
 The exploratory `R` code can be used to visualize a clustered feature heatmap and a UMAP dimensionality reduction.
 
