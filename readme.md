@@ -32,6 +32,8 @@ These R packages are for exploratory data visualization.  The 909 benchmark belo
 
 
 * `data.table`
+* `pheatmap`
+* `ggplot2`
 * `UMAP`
 
 
