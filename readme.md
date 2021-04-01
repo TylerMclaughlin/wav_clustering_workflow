@@ -30,7 +30,7 @@ By reordering `.wav` files such that similar `.wav` files are next to one anothe
 
 #### optional R packages :
 
-These R packages are for exploratory data visualization.  The 909 benchmark below uses them to plot the clustered feature heatmap and dimensionality reduction. (see script `visualize_clusters_and_umap.R`).  `R` and this script are not required to use this tool to cluster and organize audio samples.
+These R packages are for exploratory data visualization.  The 909 benchmark below uses them to plot the clustered feature heatmap and dimensionality reduction. (see script `visualize_clusters_and_umap.R`).  `R` and this script are not required to use this tool for its basic purposes: clustering and organizing audio samples.
 
 
 * `data.table`
