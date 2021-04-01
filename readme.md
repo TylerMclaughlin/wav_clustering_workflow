@@ -39,7 +39,7 @@ These are exploratory visualization.  The 909 benchmark below uses them to plot 
 
 This benchmark can be considered a 'sanity check' or positive control experiment.  
 
-I wanted to make sure hierarchical clustering could be used to reliably separate kick drums, toms, hi-hats, snares, etc from one another.  Since I had the truth labels for these drum sounds, (colored bar above the heatmap), I could do a quick check to make sure the clustered acoustic properties align with the truly distinct drum sound types.  You can see the algorithm does a pretty decent job.
+I wanted to make sure hierarchical clustering could be used to reliably separate bass drums, toms, hi-hats, snares, etc from one another.  Since I had the drum categories (like "bd" for bass drum samples or "hh" for hi-hat samples) for these drum sounds, (shown in the colored bar above the heatmap), I could do a quick check to make sure the clusters derived from the acoustic properties align with the drum categories.  You can think of these drum categories as "truth labels".   You can see the algorithm does a pretty decent job.
 ![heatmap](./figures/clustermap_909.png)
 
 I also made a UMAP projection to reduce the dimensionality of the feature space from 136 (68 * 2 frames) to 2 dimensions. 
