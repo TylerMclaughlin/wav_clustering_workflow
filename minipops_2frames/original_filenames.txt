@@ -1,0 +1,9 @@
+/Users/mclaurt/Music/dahnloads/kb6_drum_samples/ALL_EXTRACTED/[KB6]_Korg_Minipops/hihat1.wav
+/Users/mclaurt/Music/dahnloads/kb6_drum_samples/ALL_EXTRACTED/[KB6]_Korg_Minipops/sd2.wav
+/Users/mclaurt/Music/dahnloads/kb6_drum_samples/ALL_EXTRACTED/[KB6]_Korg_Minipops/wood2.wav
+/Users/mclaurt/Music/dahnloads/kb6_drum_samples/ALL_EXTRACTED/[KB6]_Korg_Minipops/hihat2.wav
+/Users/mclaurt/Music/dahnloads/kb6_drum_samples/ALL_EXTRACTED/[KB6]_Korg_Minipops/sd1.wav
+/Users/mclaurt/Music/dahnloads/kb6_drum_samples/ALL_EXTRACTED/[KB6]_Korg_Minipops/sd3.wav
+/Users/mclaurt/Music/dahnloads/kb6_drum_samples/ALL_EXTRACTED/[KB6]_Korg_Minipops/bd1.wav
+/Users/mclaurt/Music/dahnloads/kb6_drum_samples/ALL_EXTRACTED/[KB6]_Korg_Minipops/bd2.wav
+/Users/mclaurt/Music/dahnloads/kb6_drum_samples/ALL_EXTRACTED/[KB6]_Korg_Minipops/bd3.wav
