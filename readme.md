@@ -2,12 +2,12 @@
 
 This tool uses machine learning to organize a given collection of audio samples by acoustic similarity.
 
-Presented as a workflow in `Python`, this project applies hierarchical clustering on 68 derived acoustic features for the purposes of grouping and ordering audio samples by similarity.  Then it reorders the samples by clustering similarity and saves renamed copies of the `.wav` files to apply the reordering. Finally, it saves a dendrogram for visualization. 
+Presented as a workflow in `Python`, this project applies hierarchical clustering on 68 derived acoustic features for the purposes of grouping and ordering audio samples by similarity.  Then it uses the clustering to reorder the samples similarity and saves renamed copies of the `.wav` files to apply the new file organization. Finally, it saves a dendrogram for visualization of the clusters. 
 
 The exploratory `R` code can be used to visualize a clustered feature heatmap and a UMAP dimensionality reduction.
 
 The reliability of the algorithm was assessed on 71 Roland 909 drum machine samples from the free [BPB 909 Casette sample pack](https://bedroomproducersblog.com/2014/04/24/free-909-samples/). 
-The algorithm perfectly separates 909 cymbals (hi-hats, ride cymbal, crash cymbal) from 909 membranophones ( kick drums, toms, snare drums) and further correctly separates and groups drums at a finer level ( e.g., all snare drums are grouped together).  Interesting groupings arise such as 909 clap being grouped with crash and ride cymbals rather than the snare drum. 
+The algorithm perfectly separates 909 cymbals (hi-hats, ride cymbal, crash cymbal) from 909 membranophones ( kick drums, toms, snare drums) and further correctly separates and groups drums at a finer level ( e.g., all snare drums are grouped together).  Interesting groupings arise such as the 909 clap being grouped with crash and ride cymbals rather than the snare drum. 
 
 Acoustic features are extracted from the first two non-overlapping 50 ms frames of the audio.  68 features per frame per sample are calculated using the pyAudioAnalysis library. Features include MFCCs, chroma, energy, spectral entropy, and more from `pyAudioAnalysis`.
 
@@ -52,7 +52,7 @@ The **drum categories** (like "bd" for bass drum samples or "hh" for hi-hat samp
 
 The following UMAP projection reduces the dimensionality of the feature space from 136 (68 * 2 frames) to 2 dimensions. 
 ![umap](./figures/umap_909.png)
-This UMAP plot is interesting but it is difficult to explain the groupings.  Perhaps it reflects similarities and differences in synthesis / sampling methods of the drums of the 909.
+This UMAP plot is interesting but it is difficult to explain the groupings.  Perhaps it reflects similarities and differences in synthesis / sampling methods of the drums of the 909.  Clockwise from the left, we have membranophones, snares, and cymbals + clap.
 
 NB:  The `R` script is required to generate plots like these.
 
