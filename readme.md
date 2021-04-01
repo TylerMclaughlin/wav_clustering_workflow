@@ -2,9 +2,9 @@
 
 This tool uses machine learning to organize a given collection of audio samples by acoustic similarity.
 
-Presented as a workflow in Python, this project applies hierarchical clustering on 68 derived acoustic features for the purposes of grouping and ordering the samples by similarity.  Then it saves renamed copies of the `.wav` files that are ordered by similarity. Finally, it saves a dendrogram for visualization. 
+Presented as a workflow in `Python`, this project applies hierarchical clustering on 68 derived acoustic features for the purposes of grouping and ordering the samples by similarity.  Then it saves renamed copies of the `.wav` files that are ordered by similarity. Finally, it saves a dendrogram for visualization. 
 
-The exploratory R code can be used to visualize a clustered feature heatmap and a UMAP dimensionality reduction.
+The exploratory `R` code can be used to visualize a clustered feature heatmap and a UMAP dimensionality reduction.
 
 The reliability of the algorithm was assessed on 71 Roland 909 drum machine samples from the free [BPB 909 Casette sample pack](https://bedroomproducersblog.com/2014/04/24/free-909-samples/). 
 The algorithm successfully groups kick drums, toms, snare drums, and cymbals together.  Acoustic features are extracted from the first two non-overlapping 50 ms frames of the audio.  68 features per frame per sample are calculated using the pyAudioAnalysis library. Features include MFCCs, chroma, energy, spectral entropy, and more from `pyAudioAnalysis`.
@@ -63,18 +63,18 @@ NB:  You will need to use the `R` script to generate plots like these.
 
 18 thousand `.wav` files were long enough to extract features on two 50 ms frames.  These 18 thousand were hierarchically clustered, the others were excluded from the benchmark.
 
-The total size of the input `.wav` data was ~5 GB (all 18 thousand `.wav` files).  
-Feature extraction and hierarchical clustering took less than one hour on my 2019 MacBook Pro. 
+The total size of the input `.wav` data was ~5 GB (all 18 thousand `.wav` files that were clustered).  
+Feature extraction and hierarchical clustering took less than one hour on a 2019 MacBook Pro. 
 
 
 
 ## Usage
 
-The easiest way to use this tool is as a Python library.  The `glob` module offers a convenient way for pattern matching as `glob` comes installed with Python.  
+The easiest way to use this tool is as a `Python` module.  Additionally, the `glob` module offers a convenient way for pattern matching as `glob` comes installed with Python.  
 `glob` supports Unix-style wildcards so it can be used to specify multiple `.wav` files with a single expression.
 
 ```python
-# import this repo 
+# import this repository
 import wav_clustering_workflow as wcw
 
 # import glob; comes with Python
@@ -102,9 +102,10 @@ wavs = wavs + more_wavs
 # The output directory will include sorted copies of the input .wavs, the dendrogram visualization, and a text file showing the original paths of the .wavs
 
 wcw.cluster_and_save_order(wavs, 2, parent_dir = parent_dir, outdir = 'your_output_directory')
+
 ```
 
-More example functions can be found in the main code.  This one takes all the samples from the Korg Minipops drum machine and saves them in a new directory called 'minipops_2frames'.
+More example functions can be found in the main code.  This example takes all the samples from the Korg Minipops drum machine and saves them in a new directory called 'minipops_2frames'.
 
 ```python
 
@@ -121,5 +122,5 @@ This output directory contains the following generated outputs including copied,
 ## Possible future ideas
 
 * Command-line interface
-* Test on longer samples, using different window sizes or the different pyAudioAnalysis feature extraction functions for longer timescales.
+* Test on longer samples, using either different window sizes or the different `pyAudioAnalysis` feature extraction functions for longer timescales.
 * Interactive UMAP audio plot, like [this](https://petergill.shinyapps.io/shinyplay/) 
