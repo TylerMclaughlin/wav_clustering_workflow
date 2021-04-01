@@ -28,11 +28,12 @@ By reordering .wav files such that similar .wavs are next to one another, subtle
 
 #### optional R packages :
 
+These R packages are for exploratory data visualization.  The 909 benchmark below uses them to plot the clustered feature heatmap and dimensionality reduction. (in script 'visualize_clusters_and_umap.R').  You do not need them to cluster and organize your audio samples.
+
 
 * data.table
 * UMAP
 
-These are exploratory visualization.  The 909 benchmark below uses them to plot the clustered feature heatmap and dimensionality reduction. (in script 'visualize_clusters_and_umap.R'):
 
 
 ## 909 drum machine clustering benchmark results
