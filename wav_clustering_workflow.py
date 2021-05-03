@@ -6,6 +6,7 @@ import os
 import glob
 import pandas as pd
 from shutil import copy
+import pickle
 
 from pyAudioAnalysis import ShortTermFeatures as aF
 from pyAudioAnalysis import audioBasicIO as aIO 
@@ -84,8 +85,9 @@ def save_ordered_wav_copies(parent_dir, list_of_dir_wavs, outdir):
         for orig_wav in list_of_dir_wavs:
             output.write(str(os.path.join(parent_dir, orig_wav)) +'\n')
     for i, source_wav in enumerate(list_of_dir_wavs):
-        # add leading zeros to the output filename.  For simplicity, just use a number.  
-        out_filename = str(i).zfill(5) + '.wav'
+        # add leading zeros to the output filename, which is a number (corresponding to leaf-order)
+        # followed by the original name of the wav.
+        out_filename = str(i).zfill(5) + '_' + source_wav.replace('/','_')
         copy(os.path.join(parent_dir, source_wav), os.path.join(outdir,out_filename))
 
 # a few tests for the BPB Casette 909 data set.  
@@ -127,6 +129,9 @@ def cluster_test_909_data():
     dn = dendrogram(Z, labels = list_of_909_dir_wavs, orientation = 'left')
     plt.savefig('909_test/dendrogram.png')
 
+def pickle_object(obj, outdir, out_name):
+    with open(os.path.join(outdir,out_name),'wb') as f:
+        pickle.dump(obj, f)
 
 def cluster_and_save_order(globbed_wav_list, n_frames, parent_dir, outdir):
     """
@@ -146,6 +151,10 @@ def cluster_and_save_order(globbed_wav_list, n_frames, parent_dir, outdir):
     # saves renamed,  copies of the wav files, sorted by similarity.
     # also saves the original wav file names in the order.
     save_ordered_wav_copies(parent_dir, list_of_dir_wavs = drumnames, outdir = outdir)
+    # Save the clustering result so it can be used later for grouping.
+    pickle_object(Z, outdir, 'ward_linkage.pkl')
+    # Save the dataframe.
+    pickle_object(df_matrix, outdir, 'df_matrix.pkl')
     # For labels, use the ordering of the dataframe columns, NOT the order in the leaves_list, ll.
     # left means the roots are on the left, rather than the top.
     dn = dendrogram(Z, labels = df_matrix.columns, orientation = 'left')
