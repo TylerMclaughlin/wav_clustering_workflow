@@ -99,7 +99,7 @@ def save_test_909_data():
     Saves pandas df of features for all 909 samples
     """
     wav_pattern = "/Users/mclaurt/Music/dahnloads/BPB Cassette 909/clean/*.wav"
-    bp909_wavs = glob.glob(wav_pattern)
+    bp909_wavs = sorted(glob.glob(wav_pattern))
     print(bp909_wavs)
     out_matrix = get_features_frame(bp909_wavs, 2)
     out_matrix.to_csv('data/drums_and_features.csv', index = None)
@@ -128,6 +128,7 @@ def cluster_test_909_data():
     # left means the roots are on the left, rather than the top.
     dn = dendrogram(Z, labels = list_of_909_dir_wavs, orientation = 'left')
     plt.savefig('909_test/dendrogram.png')
+    plt.close()
 
 def pickle_object(obj, outdir, out_name):
     with open(os.path.join(outdir,out_name),'wb') as f:
@@ -146,8 +147,10 @@ def cluster_and_save_order(globbed_wav_list, n_frames, parent_dir, outdir):
     feature_matrix = df_matrix.T.values # n dimensional, m observations.
     Z = ward(pdist(feature_matrix))
     ll = list(leaves_list(Z))
+    #print(ll)
     drumnames = df_matrix.columns[ll]
-    print(f'wav names in clustered order:  {drumnames}')
+    #print(f'wav names in pre-clustered order:  {df_matrix.columns}')
+    #print(f'wav names in clustered order:  {drumnames}')
     # saves renamed,  copies of the wav files, sorted by similarity.
     # also saves the original wav file names in the order.
     save_ordered_wav_copies(parent_dir, list_of_dir_wavs = drumnames, outdir = outdir)
@@ -160,13 +163,14 @@ def cluster_and_save_order(globbed_wav_list, n_frames, parent_dir, outdir):
     dn = dendrogram(Z, labels = df_matrix.columns, orientation = 'left')
     # save plot in the out dir.
     plt.savefig(os.path.join(outdir,'dendrogram.png'))
+    plt.close()
 
 # the following functions compartmentalize some experiments.
 # They focus on either a single drum machine (Korg Minipops), a single manufacturer (Korg / Elektron), the entire kb6 collection.
 
 def get_minipops():
     parent_dir = '/Users/mclaurt/Music/dahnloads/kb6_drum_samples/ALL_EXTRACTED/'
-    minipops_wavs = glob.glob(parent_dir + '[[]KB6[]]_Korg_Minipops/*.wav')
+    minipops_wavs = sorted(glob.glob(parent_dir + '[[]KB6[]]_Korg_Minipops/*.wav'))
     cluster_and_save_order(minipops_wavs, 2, parent_dir = parent_dir, outdir = 'minipops_2frames')
 
 def get_all_elektron():
@@ -183,3 +187,8 @@ def get_all_kb6():
     parent_dir = '/Users/mclaurt/Music/dahnloads/kb6_drum_samples/ALL_EXTRACTED/'
     wavs = glob.glob(parent_dir + '[[]KB6[]]_*/*.wav')
     cluster_and_save_order(wavs, 2, parent_dir = parent_dir, outdir = 'all_2frames')
+
+def get_909_test():
+    parent_dir = "/Users/mclaurt/Music/dahnloads/BPB Cassette 909/"
+    wavs = sorted(glob.glob(parent_dir + "clean/*.wav"))
+    cluster_and_save_order(wavs, 2, parent_dir = parent_dir, outdir = 'test_clustering_909s')
