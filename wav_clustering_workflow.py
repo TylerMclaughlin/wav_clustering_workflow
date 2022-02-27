@@ -23,6 +23,8 @@ def get_short_term_features(wav_loc, win = 0.050, step = 0.050):
 
     # get sampling frequency and signal.
     fs, s = aIO.read_audio_file(wav_loc)
+    # convert to mono so all features work!
+    s = aIO.stereo_to_mono(s) 
 
     # print duration of wav in seconds:
     duration = len(s) / float(fs)
@@ -139,6 +141,10 @@ def cluster_and_save_order(globbed_wav_list, n_frames, parent_dir, outdir):
     This is the function for hierarchically clustering wav files and saving them with renamed files, sorted by similarity.
     taking a list of wavs, a number of time frames 
     """
+    n_samples_in_glob = len(globbed_wav_list)
+    if n_samples_in_glob < 3:
+        print(f'{n_samples_in_glob} detected in input list: {globbed_wav_list}.  Not enough to cluster.')
+        raise FileNotFoundError
     df_matrix = get_features_frame(globbed_wav_list, n_frames, include_parent_dir = True)
     # Replace missing data. 
     # This is necessary for files that aren't long enough to have features for all the time frames.
@@ -157,7 +163,9 @@ def cluster_and_save_order(globbed_wav_list, n_frames, parent_dir, outdir):
     # Save the clustering result so it can be used later for grouping.
     pickle_object(Z, outdir, 'ward_linkage.pkl')
     # Save the dataframe.
+    print('Writing feature matrix.')
     pickle_object(df_matrix, outdir, 'df_matrix.pkl')
+    df_matrix.to_csv('all_features.csv',index = False)
     # For labels, use the ordering of the dataframe columns, NOT the order in the leaves_list, ll.
     # left means the roots are on the left, rather than the top.
     dn = dendrogram(Z, labels = df_matrix.columns, orientation = 'left')

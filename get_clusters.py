@@ -12,7 +12,7 @@ def load_linkage(data_dir):
   
 def save_clusters_into_dirs(data_dir, Z, cluster_membership):
     ll = leaves_list(Z)
-    all_output_wavs = sorted(glob.glob(data_dir + '/*.wav'))
+    all_output_wavs = sorted(glob.glob(data_dir + '/*.wav') + glob.glob(data_dir + '/*.aif'))
     new_clusters = cluster_membership[ll]
     # make dictionary between original number and output wavs.
     for i, c in enumerate(new_clusters):
